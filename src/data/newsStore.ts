@@ -1,4 +1,16 @@
-import { NewsArticle, NewsVideo, AdBanner, UserProfile } from '../types/news';
+import {
+  NewsArticle,
+  NewsVideo,
+  AdBanner,
+  UserProfile,
+  EPaperEdition,
+  DailyPoll,
+  CityWeather,
+  RashifalSign,
+  PanchangInfo,
+  WebStory,
+  PushNotificationItem,
+} from '../types/news';
 
 export const INITIAL_BREAKING_NEWS: string[] = [
   'F9NEWSINDIA: महाराष्ट्र और उत्तर प्रदेश में विकास परियोजनाओं को मिली बड़ी मंजूरी।',
@@ -243,27 +255,6 @@ F9NEWSINDIA अपने विशेष कार्यक्रम 'जनत�
     status: 'published',
     comments: [],
   },
-  {
-    id: 'f9-art-111',
-    title: 'विशेष रिपोर्ट: डिजिटल मीडिया विज्ञापन से स्थानीय व्यापार को कैसे मिले नई ऊंचाई? F9NEWSINDIA बिजनेस गाइड',
-    summary: 'छोटे और मध्यम व्यापारियों के लिए डिजिटल मार्केटिंग, सोशल मीडिया प्रमोशन और ब्रांडिंग का सही तरीका।',
-    content: `डिजिटल युग में किसी भी व्यापार की सफलता उसकी ऑनलाइन उपस्थिति पर निर्भर करती है। F9NEWSINDIA डिजिटल मार्केटिंग टीम ने स्थानीय दुकानदारों, कोचिंग संस्थानों, रियल एस्टेट डेवलपर्स और डॉक्टरों के लिए विशेष प्रचार पैकेज पेश किए हैं।
-
-F9NEWSINDIA के लाखों दैनिक पाठकों तक अपनी दुकान या सेवा का प्रचार पहुंचाकर अपने कारोबार को नई गति दें। विज्ञापन संबंधी पूछताछ के लिए हमारे विज्ञापन अनुभाग पर संपर्क करें।`,
-    category: 'बिजनेस',
-    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1000&auto=format&fit=crop&q=80',
-    publishedAt: '2026-10-27T09:00:00Z',
-    reporterName: 'F9 विज्ञापन एवं मार्केटिंग ब्यूरो',
-    location: 'नई दिल्ली',
-    views: 4200,
-    likes: 190,
-    shares: 88,
-    isSponsored: true,
-    sponsoredBrand: 'F9 Digital Media Services',
-    tags: ['बिजनेस', 'डिजिटल मार्केटिंग', 'विज्ञापन', 'F9NEWS'],
-    status: 'published',
-    comments: [],
-  },
 ];
 
 export const INITIAL_VIDEOS: NewsVideo[] = [
@@ -319,16 +310,6 @@ export const INITIAL_VIDEOS: NewsVideo[] = [
     views: '65K बार देखा गया',
     publishedAt: '1 दिन पहले',
   },
-  {
-    id: 'vid-6',
-    title: 'शेयर बाजार में लगातार तेजी के पीछे कौन से 3 बड़े कारण हैं? रिटेल निवेशक क्या करें? | बिजनेस इनसाइट',
-    youtubeId: 'market_bull_run',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1000&auto=format&fit=crop&q=80',
-    duration: '09:30',
-    category: 'बिजनेस',
-    views: '42K बार देखा गया',
-    publishedAt: '1 दिन पहले',
-  },
 ];
 
 export const INITIAL_ADS: AdBanner[] = [
@@ -367,7 +348,213 @@ export const DEFAULT_USER: UserProfile = {
   language: 'hi',
 };
 
-// Store Helper class
+// NEW DATASETS: E-PAPER, POLL, WEATHER, RASHIFAL, WEB STORIES, NOTIFICATIONS
+
+export const INITIAL_EPAPERS: EPaperEdition[] = [
+  {
+    id: 'epaper-delhi',
+    editionName: 'राष्ट्रीय संस्करण',
+    city: 'नई दिल्ली',
+    date: '28 अक्टूबर 2026',
+    totalPages: 8,
+    pages: [
+      {
+        pageNumber: 1,
+        title: 'मुख्य पृष्ठ: संसद सत्र, राष्ट्रीय विकास एवं डिजिटल घोषणाएं',
+        imageUrl: 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=1200&auto=format&fit=crop&q=80',
+      },
+      {
+        pageNumber: 2,
+        title: 'राजधानी एवं एनसीआर: प्रदूषण नियंत्रण कार्ययोजना व मेट्रो विस्तार',
+        imageUrl: 'https://images.unsplash.com/photo-1542296332-2e4473faf563?w=1200&auto=format&fit=crop&q=80',
+      },
+      {
+        pageNumber: 3,
+        title: 'व्यापार एवं कॉर्पोरेट: शेयर बाजार शिखर पर, स्टार्टअप्स में उछाल',
+        imageUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&auto=format&fit=crop&q=80',
+      },
+      {
+        pageNumber: 4,
+        title: 'संपादकीय: सच की आवाज़ — निष्पक्ष पत्रकारिता के नए आयाम',
+        imageUrl: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&auto=format&fit=crop&q=80',
+      },
+    ],
+  },
+  {
+    id: 'epaper-mumbai',
+    editionName: 'महाराष्ट्र महा-संस्करण',
+    city: 'मुंबई',
+    date: '28 अक्टूबर 2026',
+    totalPages: 6,
+    pages: [
+      {
+        pageNumber: 1,
+        title: 'मुख्य पृष्ठ: समृद्धि महामार्ग एवं विदर्भ के लिए बड़े फैसले',
+        imageUrl: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1200&auto=format&fit=crop&q=80',
+      },
+      {
+        pageNumber: 2,
+        title: 'पुणे-ठाणे विशेष: इंफ्रास्ट्रक्चर एवं आईटी गलियारा रिपोर्ट',
+        imageUrl: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&auto=format&fit=crop&q=80',
+      },
+    ],
+  },
+  {
+    id: 'epaper-lucknow',
+    editionName: 'उत्तर प्रदेश राज्य संस्करण',
+    city: 'लखनऊ',
+    date: '28 अक्टूबर 2026',
+    totalPages: 8,
+    pages: [
+      {
+        pageNumber: 1,
+        title: 'मुख्य पृष्ठ: जेवर इंटरनेशनल एयरपोर्ट का सफल परीक्षण',
+        imageUrl: 'https://images.unsplash.com/photo-1542296332-2e4473faf563?w=1200&auto=format&fit=crop&q=80',
+      },
+      {
+        pageNumber: 2,
+        title: 'पूर्वांचल व अवध: ग्रामीण विकास एवं स्वास्थ्य शिविर समाचार',
+        imageUrl: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&auto=format&fit=crop&q=80',
+      },
+    ],
+  },
+];
+
+export const INITIAL_POLL: DailyPoll = {
+  id: 'poll-today',
+  question: 'क्या 5G और डिजिटल इंडिया के विस्तार से छोटे शहरों और ग्रामीण क्षेत्रों में युवाओं के लिए रोजगार के नए अवसर बढ़े हैं?',
+  category: 'जनमत सर्वेक्षण (Poll of the Day)',
+  totalVotes: 3840,
+  endsAt: 'आज रात 11:59 PM',
+  options: [
+    { id: 'opt-1', text: 'हाँ, बहुत अधिक लाभ हुआ है', votes: 2420 },
+    { id: 'opt-2', text: 'नहीं, केवल बड़े शहरों तक सीमित है', votes: 680 },
+    { id: 'opt-3', text: 'कुछ हद तक लाभ हुआ है', votes: 560 },
+    { id: 'opt-4', text: 'कह नहीं सकते', votes: 180 },
+  ],
+};
+
+export const INITIAL_WEATHER: CityWeather[] = [
+  { city: 'नई दिल्ली', temp: 28, condition: 'धूप व हल्का कोहरा', aqi: 185, aqiStatus: 'मध्यम', high: 32, low: 19, humidity: 55 },
+  { city: 'मुंबई', temp: 31, condition: 'साफ़ मौसम', aqi: 92, aqiStatus: 'अच्छा', high: 33, low: 24, humidity: 70 },
+  { city: 'लखनऊ', temp: 27, condition: 'धूप खिली', aqi: 145, aqiStatus: 'मध्यम', high: 31, low: 18, humidity: 50 },
+  { city: 'वाराणसी', temp: 29, condition: 'खुशनुमा', aqi: 110, aqiStatus: 'मध्यम', high: 33, low: 20, humidity: 52 },
+  { city: 'नागपुर', temp: 30, condition: 'हल्के बादल', aqi: 85, aqiStatus: 'अच्छा', high: 34, low: 21, humidity: 48 },
+  { city: 'पटना', temp: 28, condition: 'साफ़ आकाश', aqi: 160, aqiStatus: 'मध्यम', high: 31, low: 19, humidity: 58 },
+  { city: 'जयपुर', temp: 29, condition: 'तेज धूप', aqi: 125, aqiStatus: 'मध्यम', high: 33, low: 17, humidity: 42 },
+  { city: 'पुणे', temp: 27, condition: 'सुहावना मौसम', aqi: 75, aqiStatus: 'अच्छा', high: 30, low: 18, humidity: 62 },
+];
+
+export const INITIAL_PANCHANG: PanchangInfo = {
+  date: 'बुधवार, 28 अक्टूबर 2026',
+  tithi: 'कार्तिक कृष्ण पक्ष तृतीया',
+  nakshatra: 'रोहिणी नक्षत्र (सायं 06:14 तक)',
+  sunrise: 'प्रातः 06:29 AM',
+  sunset: 'सायं 05:42 PM',
+  rahukaal: 'दोपहर 12:05 PM से 01:30 PM तक',
+  shubhMuhurat: 'अभिजीत मुहूर्त: प्रातः 11:42 AM से दोपहर 12:28 PM',
+};
+
+export const INITIAL_RASHIFAL: RashifalSign[] = [
+  { id: 'mesh', name: 'मेष (Aries)', symbol: '♈', forecast: 'कार्यक्षेत्र में नई ज़िम्मेदारी मिल सकती है। आर्थिक पक्ष मजबूत होगा। परिवार का सहयोग मिलेगा।', luckyColor: 'लाल', luckyNumber: 9, rating: 5 },
+  { id: 'vrishabh', name: 'वृषभ (Taurus)', symbol: '♉', forecast: 'व्यवसाय में नए अवसर प्राप्त होंगे। सेहत का विशेष ध्यान रखें। अनावश्यक विवाद से बचें।', luckyColor: 'सफ़ेद', luckyNumber: 6, rating: 4 },
+  { id: 'mithun', name: 'मिथुन (Gemini)', symbol: '♊', forecast: 'विद्यार्थियों के लिए दिन उत्तम रहेगा। मित्रों से शुभ समाचार प्राप्त होगा। यात्रा के योग हैं।', luckyColor: 'हरा', luckyNumber: 5, rating: 5 },
+  { id: 'kark', name: 'कर्क (Cancer)', symbol: '♋', forecast: 'मन में सकारात्मक विचार रहेंगे। प्रॉपर्टी या वाहन संबंधी योजनाएं गति पकड़ेंगी।', luckyColor: 'दूधिया', luckyNumber: 2, rating: 4 },
+  { id: 'singh', name: 'सिंह (Leo)', symbol: '♌', forecast: 'नेतृत्व क्षमता की प्रशंसा होगी। पुराने निवेश से अच्छा लाभ होने की पूरी संभावना है।', luckyColor: 'केसरिया', luckyNumber: 1, rating: 5 },
+  { id: 'kanya', name: 'कन्या (Virgo)', symbol: '♍', forecast: 'कार्यस्थल पर सावधानी बरतें। वाणी पर संयम रखें। शाम को शुभ समाचार मिल सकता है।', luckyColor: 'नीला', luckyNumber: 7, rating: 3 },
+  { id: 'tula', name: 'तुला (Libra)', symbol: '♎', forecast: 'कला और रचनात्मक कार्यों में सफलता मिलेगी। दांपत्य जीवन में मधुरता बनी रहेगी।', luckyColor: 'गुलाबी', luckyNumber: 6, rating: 5 },
+  { id: 'vrishchik', name: 'वृश्चिक (Scorpio)', symbol: '♏', forecast: 'ऊर्जा और उत्साह से भरे रहेंगे। लंबे समय से रुका हुआ काम आज पूरा हो सकता है।', luckyColor: 'मरून', luckyNumber: 9, rating: 4 },
+  { id: 'dhanu', name: 'धनु (Sagittarius)', symbol: '♐', forecast: 'धार्मिक और सामाजिक कार्यों में रुचि बढ़ेगी। भाग्य का पूरा साथ मिलेगा। आर्थिक लाभ।', luckyColor: 'पीला', luckyNumber: 3, rating: 5 },
+  { id: 'makar', name: 'मकर (Capricorn)', symbol: '♑', forecast: 'कठिन परिश्रम का उत्तम फल मिलेगा। व्यापार में नए अनुबंध लाभकारी सिद्ध होंगे।', luckyColor: 'गहरा नीला', luckyNumber: 8, rating: 4 },
+  { id: 'kumbh', name: 'कुंभ (Aquarius)', symbol: '♒', forecast: 'अचानक यात्रा की संभावना। तकनीकी क्षेत्र के लोगों को विशेष सफलता हासिल होगी।', luckyColor: 'आसमानी', luckyNumber: 4, rating: 4 },
+  { id: 'meen', name: 'मीन (Pisces)', symbol: '♓', forecast: 'मानसिक शांति का अनुभव होगा। वरिष्ठों का मार्गदर्शन लाभ देगा। खर्च पर नियंत्रण रखें।', luckyColor: 'सुनहरा', luckyNumber: 3, rating: 5 },
+];
+
+export const INITIAL_WEB_STORIES: WebStory[] = [
+  {
+    id: 'ws-1',
+    title: 'जेवर एयरपोर्ट: एशिया के सबसे बड़े हवाई अड्डे की 5 बड़ी खासियतें',
+    coverImage: 'https://images.unsplash.com/photo-1542296332-2e4473faf563?w=800&auto=format&fit=crop&q=80',
+    views: '24K व्यूज',
+    slides: [
+      {
+        id: 's1',
+        title: 'अत्याधुनिक रनवे परीक्षण सफल',
+        description: 'बोइंग और एयरबस विमानों का सफल नेविगेशन ट्रायल पूरा।',
+        imageUrl: 'https://images.unsplash.com/photo-1542296332-2e4473faf563?w=800&auto=format&fit=crop&q=80',
+        category: 'उत्तर प्रदेश',
+      },
+      {
+        id: 's2',
+        title: 'पर्यावरण के अनुकूल ग्रीन एयरपोर्ट',
+        description: 'पूर्णतः सौर ऊर्जा और नेट-ज़ीरो कार्बन उत्सर्जन पर आधारित।',
+        imageUrl: 'https://images.unsplash.com/photo-1508873696983-2df5293cb32f?w=800&auto=format&fit=crop&q=80',
+        category: 'टेक्नोलॉजी',
+      },
+      {
+        id: 's3',
+        title: 'लाखों नए रोजगार के द्वार',
+        description: 'पश्चिमी यूपी और एनसीआर के युवाओं को विनिर्माण व एविएशन में अवसर।',
+        imageUrl: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&auto=format&fit=crop&q=80',
+        category: 'बिजनेस',
+      },
+    ],
+  },
+  {
+    id: 'ws-2',
+    title: 'साइबर ठगी से बचने के 4 गोल्डन रूल्स: पुलिस की चेतावनी',
+    coverImage: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&auto=format&fit=crop&q=80',
+    views: '18K व्यूज',
+    slides: [
+      {
+        id: 's4',
+        title: 'डिजिटल अरेस्ट पूरी तरह फर्जी',
+        description: 'पुलिस या सीबीआई कभी वीडियो कॉल पर पैसे की मांग नहीं करती।',
+        imageUrl: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&auto=format&fit=crop&q=80',
+        category: 'अपराध',
+      },
+      {
+        id: 's5',
+        title: 'हेल्पलाइन 1930 पर तुरंत कॉल करें',
+        description: 'ऑनलाइन धोखाधड़ी होते ही पहले घंटे (Golden Hour) में शिकायत दर्ज कराएं।',
+        imageUrl: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&auto=format&fit=crop&q=80',
+        category: 'जागरूकता',
+      },
+    ],
+  },
+];
+
+export const INITIAL_NOTIFICATIONS: PushNotificationItem[] = [
+  {
+    id: 'notif-1',
+    title: 'ब्रेकिंग न्यूज़ अलर्ट',
+    message: 'महाराष्ट्र और उत्तर प्रदेश में नई औद्योगिक गलियारा परियोजनाओं को मिली केंद्र की मंजूरी।',
+    timeAgo: '15 मिनट पहले',
+    category: 'देश',
+    isRead: false,
+    articleId: 'f9-art-101',
+  },
+  {
+    id: 'notif-2',
+    title: 'क्रिकेट अपडेट',
+    message: 'टीम इंडिया की ऐतिहासिक जीत, युवा सलामी बल्लेबाज ने जड़ा विस्फोटक शतक।',
+    timeAgo: '1 घंटा पहले',
+    category: 'खेल',
+    isRead: false,
+    articleId: 'f9-art-106',
+  },
+  {
+    id: 'notif-3',
+    title: 'बाजार अपडेट',
+    message: 'शेयर बाजार में रिकॉर्ड तेजी, सेंसेक्स 85,000 के ऐतिहासिक शिखर पर।',
+    timeAgo: '2 घंटे पहले',
+    category: 'बिजनेस',
+    isRead: true,
+    articleId: 'f9-art-107',
+  },
+];
+
+// STORE CLASS
 class NewsDataStore {
   private static instance: NewsDataStore;
   private articles: NewsArticle[] = [];
@@ -376,6 +563,8 @@ class NewsDataStore {
   private ads: AdBanner[] = [];
   private currentUser: UserProfile = DEFAULT_USER;
   private admobEnabled: boolean = true;
+  private poll: DailyPoll = INITIAL_POLL;
+  private notifications: PushNotificationItem[] = INITIAL_NOTIFICATIONS;
 
   private constructor() {
     this.loadFromStorage();
@@ -407,6 +596,12 @@ class NewsDataStore {
 
       const storedAdmob = localStorage.getItem('f9_admob_status');
       this.admobEnabled = storedAdmob !== null ? JSON.parse(storedAdmob) : true;
+
+      const storedPoll = localStorage.getItem('f9_daily_poll');
+      this.poll = storedPoll ? JSON.parse(storedPoll) : INITIAL_POLL;
+
+      const storedNotifs = localStorage.getItem('f9_notifications');
+      this.notifications = storedNotifs ? JSON.parse(storedNotifs) : INITIAL_NOTIFICATIONS;
     } catch {
       this.articles = INITIAL_ARTICLES;
       this.breakingNews = INITIAL_BREAKING_NEWS;
@@ -414,6 +609,8 @@ class NewsDataStore {
       this.ads = INITIAL_ADS;
       this.currentUser = DEFAULT_USER;
       this.admobEnabled = true;
+      this.poll = INITIAL_POLL;
+      this.notifications = INITIAL_NOTIFICATIONS;
     }
   }
 
@@ -425,6 +622,8 @@ class NewsDataStore {
       localStorage.setItem('f9_ads', JSON.stringify(this.ads));
       localStorage.setItem('f9_user', JSON.stringify(this.currentUser));
       localStorage.setItem('f9_admob_status', JSON.stringify(this.admobEnabled));
+      localStorage.setItem('f9_daily_poll', JSON.stringify(this.poll));
+      localStorage.setItem('f9_notifications', JSON.stringify(this.notifications));
     } catch (e) {
       console.warn('Storage save failed:', e);
     }
@@ -565,6 +764,17 @@ class NewsDataStore {
   public addBreakingNews(text: string) {
     if (!text.trim()) return;
     this.breakingNews.unshift(text.trim());
+
+    // Also add to notifications
+    this.notifications.unshift({
+      id: `notif-${Date.now()}`,
+      title: 'ब्रेकिंग न्यूज़ अलर्ट',
+      message: text.trim(),
+      timeAgo: 'अभी-अभी',
+      category: 'देश',
+      isRead: false,
+    });
+
     this.saveToStorage();
   }
 
@@ -602,6 +812,66 @@ class NewsDataStore {
     this.saveToStorage();
   }
 
+  // E-Paper
+  public getEPapers(): EPaperEdition[] {
+    return INITIAL_EPAPERS;
+  }
+
+  // Daily Poll
+  public getPoll(): DailyPoll {
+    return this.poll;
+  }
+
+  public votePoll(optionId: string): DailyPoll {
+    if (this.poll.userVotedOptionId) return this.poll;
+
+    const opt = this.poll.options.find((o) => o.id === optionId);
+    if (opt) {
+      opt.votes += 1;
+      this.poll.totalVotes += 1;
+      this.poll.userVotedOptionId = optionId;
+      this.saveToStorage();
+    }
+    return this.poll;
+  }
+
+  // Weather & AQI
+  public getWeatherList(): CityWeather[] {
+    return INITIAL_WEATHER;
+  }
+
+  // Rashifal & Panchang
+  public getRashifalList(): RashifalSign[] {
+    return INITIAL_RASHIFAL;
+  }
+
+  public getPanchang(): PanchangInfo {
+    return INITIAL_PANCHANG;
+  }
+
+  // Web Stories
+  public getWebStories(): WebStory[] {
+    return INITIAL_WEB_STORIES;
+  }
+
+  // Notifications
+  public getNotifications(): PushNotificationItem[] {
+    return this.notifications;
+  }
+
+  public markNotificationRead(id: string) {
+    const item = this.notifications.find((n) => n.id === id);
+    if (item) {
+      item.isRead = true;
+      this.saveToStorage();
+    }
+  }
+
+  public clearNotifications() {
+    this.notifications = [];
+    this.saveToStorage();
+  }
+
   // Analytics
   public getAnalytics() {
     const totalViews = this.articles.reduce((acc, a) => acc + (a.views || 0), 0);
@@ -627,6 +897,8 @@ class NewsDataStore {
     this.ads = INITIAL_ADS;
     this.currentUser = DEFAULT_USER;
     this.admobEnabled = true;
+    this.poll = INITIAL_POLL;
+    this.notifications = INITIAL_NOTIFICATIONS;
     this.saveToStorage();
   }
 }

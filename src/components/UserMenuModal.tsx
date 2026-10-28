@@ -15,6 +15,8 @@ import {
   Smartphone,
   X,
   FileText,
+  Newspaper,
+  CloudSun,
 } from 'lucide-react';
 import { F9Logo } from './F9Logo';
 import { newsStore } from '../data/newsStore';
@@ -26,6 +28,9 @@ interface UserMenuModalProps {
   onOpenAbout: () => void;
   onOpenBusinessAd: () => void;
   onOpenAndroidGuide: () => void;
+  onOpenEPaper: () => void;
+  onOpenRashifal: () => void;
+  onOpenWeather: () => void;
   currentLanguage: 'hi' | 'en';
   onToggleLanguage: () => void;
 }
@@ -37,6 +42,9 @@ export const UserMenuModal: React.FC<UserMenuModalProps> = ({
   onOpenAbout,
   onOpenBusinessAd,
   onOpenAndroidGuide,
+  onOpenEPaper,
+  onOpenRashifal,
+  onOpenWeather,
   currentLanguage,
   onToggleLanguage,
 }) => {
@@ -123,6 +131,66 @@ export const UserMenuModal: React.FC<UserMenuModalProps> = ({
 
         {/* Action Menu List */}
         <div className="my-4 space-y-2 text-xs">
+          {/* E-Paper */}
+          <button
+            onClick={() => {
+              onClose();
+              onOpenEPaper();
+            }}
+            className="w-full flex items-center justify-between p-3 rounded-xl bg-slate-950 hover:bg-slate-850 border border-slate-800 transition-all text-white font-semibold"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-amber-600/20 text-amber-400 rounded-lg">
+                <Newspaper className="w-4 h-4" />
+              </div>
+              <div className="text-left">
+                <span className="block font-bold">दैनिक ई-अख़बार (E-Paper)</span>
+                <span className="text-[10px] text-slate-400">आज का समाचार पत्र एवं डिजिटल संस्करण</span>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-slate-500" />
+          </button>
+
+          {/* Rashifal & Panchang */}
+          <button
+            onClick={() => {
+              onClose();
+              onOpenRashifal();
+            }}
+            className="w-full flex items-center justify-between p-3 rounded-xl bg-slate-950 hover:bg-slate-850 border border-slate-800 transition-all text-white font-semibold"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-purple-600/20 text-purple-400 rounded-lg">
+                <Sparkles className="w-4 h-4" />
+              </div>
+              <div className="text-left">
+                <span className="block font-bold">आज का राशिफल एवं पंचांग</span>
+                <span className="text-[10px] text-slate-400">12 राशियां, शुभ मुहूर्त और राहुकाल</span>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-slate-500" />
+          </button>
+
+          {/* Weather & AQI */}
+          <button
+            onClick={() => {
+              onClose();
+              onOpenWeather();
+            }}
+            className="w-full flex items-center justify-between p-3 rounded-xl bg-slate-950 hover:bg-slate-850 border border-slate-800 transition-all text-white font-semibold"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-cyan-600/20 text-cyan-400 rounded-lg">
+                <CloudSun className="w-4 h-4" />
+              </div>
+              <div className="text-left">
+                <span className="block font-bold">मौसम एवं वायु गुणवत्ता (AQI)</span>
+                <span className="text-[10px] text-slate-400">प्रमुख शहरों का तापमान एवं प्रदूषण सूचकांक</span>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-slate-500" />
+          </button>
+
           {/* Reporter Portal */}
           <button
             onClick={() => {
@@ -261,7 +329,7 @@ export const UserMenuModal: React.FC<UserMenuModalProps> = ({
 
         {/* Footer info */}
         <div className="text-center pt-2 text-[10px] text-slate-500">
-          <p>F9NEWSINDIA Android App v2.4.0</p>
+          <p>F9NEWSINDIA Android App v2.5.0</p>
           <p>सच की आवाज़ — डिजिटल पत्रकारिता का नया युग</p>
         </div>
       </div>

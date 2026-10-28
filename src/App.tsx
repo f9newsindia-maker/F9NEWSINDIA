@@ -25,6 +25,15 @@ import { PWAInstallButton } from './components/PWAInstallButton';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import { SplashScreen } from './components/SplashScreen';
 import { F9Logo } from './components/F9Logo';
+
+// NEW FEATURE COMPONENTS
+import { EPaperModal } from './components/EPaperModal';
+import { DailyPollWidget } from './components/DailyPollWidget';
+import { WeatherWidget } from './components/WeatherWidget';
+import { RashifalModal } from './components/RashifalModal';
+import { WebStoriesCarousel } from './components/WebStoriesCarousel';
+import { NotificationCenterModal } from './components/NotificationCenterModal';
+
 import {
   Flame,
   Radio,
@@ -37,6 +46,9 @@ import {
   Smartphone,
   Eye,
   MessageCircle,
+  Newspaper,
+  Sparkles,
+  CloudSun,
 } from 'lucide-react';
 
 export default function App() {
@@ -54,10 +66,17 @@ export default function App() {
   const [showAndroidGuide, setShowAndroidGuide] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
 
+  // NEW FEATURE MODALS STATE
+  const [showEPaper, setShowEPaper] = useState(false);
+  const [showRashifal, setShowRashifal] = useState(false);
+  const [showWeather, setShowWeather] = useState(false);
+  const [showNotificationCenter, setShowNotificationCenter] = useState(false);
+
   // Live store state
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [breakingNews, setBreakingNews] = useState<string[]>([]);
   const [savedArticles, setSavedArticles] = useState<NewsArticle[]>([]);
+  const [unreadNotifCount, setUnreadNotifCount] = useState(0);
   const [language, setLanguage] = useState<'hi' | 'en'>('hi');
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
@@ -70,6 +89,9 @@ export default function App() {
     const saved = list.filter((a) => user.savedArticleIds.includes(a.id));
     setSavedArticles(saved);
     setLanguage(user.language);
+
+    const notifs = newsStore.getNotifications();
+    setUnreadNotifCount(notifs.filter((n) => !n.isRead).length);
   };
 
   useEffect(() => {
@@ -113,7 +135,7 @@ export default function App() {
       {/* Offline Status Toast */}
       <OfflineIndicator />
 
-      {/* Main Header */}
+      {/* Main Header with Weather, E-Paper, and Alerts */}
       <Header
         onOpenSearch={() => setShowSearch(true)}
         onOpenLiveTv={() => {
@@ -124,11 +146,11 @@ export default function App() {
         onOpenAdmin={() => setShowAdmin(true)}
         onOpenAbout={() => setShowAbout(true)}
         onOpenAndroidGuide={() => setShowAndroidGuide(true)}
-        unreadAlertCount={breakingNews.length}
-        onOpenAlerts={() => {
-          setSelectedCategory('सभी');
-          window.scrollTo({ top: 60, behavior: 'smooth' });
-        }}
+        unreadAlertCount={unreadNotifCount}
+        onOpenAlerts={() => setShowNotificationCenter(true)}
+        onOpenEPaper={() => setShowEPaper(true)}
+        onOpenRashifal={() => setShowRashifal(true)}
+        onOpenWeather={() => setShowWeather(true)}
         currentLanguage={language}
         onToggleLanguage={handleToggleLanguage}
       />
@@ -148,6 +170,42 @@ export default function App() {
         onSelectCategory={handleSelectCategory}
       />
 
+      {/* Quick Action Navigation Strip (E-Paper, Live TV, Horoscope, Poll) */}
+      <div className="px-3 py-1.5 bg-slate-900/60 border-b border-slate-800/80 flex items-center justify-between gap-2 overflow-x-auto no-scrollbar text-xs">
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={() => setShowEPaper(true)}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-950/60 hover:bg-amber-900/60 text-amber-300 border border-amber-500/30 font-bold transition-all active:scale-95"
+          >
+            <Newspaper className="w-3.5 h-3.5 text-amber-400" />
+            <span>दैनिक ई-अख़बार</span>
+          </button>
+
+          <button
+            onClick={() => setShowRashifal(true)}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-purple-950/60 hover:bg-purple-900/60 text-purple-300 border border-purple-500/30 font-bold transition-all active:scale-95"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+            <span>राशिफल व पंचांग</span>
+          </button>
+
+          <button
+            onClick={() => setShowWeather(true)}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cyan-950/60 hover:bg-cyan-900/60 text-cyan-300 border border-cyan-500/30 font-bold transition-all active:scale-95"
+          >
+            <CloudSun className="w-3.5 h-3.5 text-cyan-400" />
+            <span>मौसम व AQI</span>
+          </button>
+        </div>
+
+        <button
+          onClick={() => setShowReporterPortal(true)}
+          className="text-blue-400 hover:text-blue-300 font-bold shrink-0 text-[11px]"
+        >
+          + न्यूज़ सबमिट करें
+        </button>
+      </div>
+
       {/* In-App Android Install Prompt Banner */}
       <PWAInstallButton variant="banner" onOpenAndroidGuide={() => setShowAndroidGuide(true)} />
 
@@ -165,6 +223,9 @@ export default function App() {
                 isBookmarked={(id) => newsStore.isBookmarked(id)}
               />
             )}
+
+            {/* NEW FEATURE: Web Stories / Visual Photo Stories Shelf */}
+            {selectedCategory === 'सभी' && <WebStoriesCarousel />}
 
             {/* Top AdMob / Sponsored Banner */}
             {isAdmobActive && topAd && (
@@ -209,7 +270,7 @@ export default function App() {
 
             {/* News Cards Grid */}
             <div className="px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredArticles.map((article) => (
+              {filteredArticles.slice(0, 4).map((article) => (
                 <NewsCard
                   key={article.id}
                   article={article}
@@ -219,6 +280,26 @@ export default function App() {
                 />
               ))}
             </div>
+
+            {/* NEW FEATURE: Daily Interactive Poll of the Day Widget */}
+            {selectedCategory === 'सभी' && (
+              <DailyPollWidget onPollUpdated={() => setRefreshTrigger((p) => p + 1)} />
+            )}
+
+            {/* Remaining News Cards Grid */}
+            {filteredArticles.length > 4 && (
+              <div className="px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {filteredArticles.slice(4).map((article) => (
+                  <NewsCard
+                    key={article.id}
+                    article={article}
+                    onSelect={(art) => setActiveArticle(art)}
+                    onToggleBookmark={handleToggleBookmark}
+                    isBookmarked={newsStore.isBookmarked(article.id)}
+                  />
+                ))}
+              </div>
+            )}
 
             {/* YouTube Channel Promo Banner */}
             <div className="mx-3 mt-6 p-4 rounded-2xl bg-gradient-to-r from-red-950 via-slate-900 to-red-900 border border-red-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -435,8 +516,38 @@ export default function App() {
           onOpenAbout={() => setShowAbout(true)}
           onOpenBusinessAd={() => setShowBusinessAd(true)}
           onOpenAndroidGuide={() => setShowAndroidGuide(true)}
+          onOpenEPaper={() => setShowEPaper(true)}
+          onOpenRashifal={() => setShowRashifal(true)}
+          onOpenWeather={() => setShowWeather(true)}
           currentLanguage={language}
           onToggleLanguage={handleToggleLanguage}
+        />
+      )}
+
+      {/* 9. NEW: Digital E-Paper Reader Modal */}
+      {showEPaper && (
+        <EPaperModal onClose={() => setShowEPaper(false)} />
+      )}
+
+      {/* 10. NEW: Aaj Ka Rashifal & Panchang Modal */}
+      {showRashifal && (
+        <RashifalModal onClose={() => setShowRashifal(false)} />
+      )}
+
+      {/* 11. NEW: Live Weather & AQI Modal */}
+      {showWeather && (
+        <WeatherWidget onClose={() => setShowWeather(false)} />
+      )}
+
+      {/* 12. NEW: Push Notification Center Modal */}
+      {showNotificationCenter && (
+        <NotificationCenterModal
+          onClose={() => setShowNotificationCenter(false)}
+          onSelectArticleById={(id) => {
+            const match = articles.find((a) => a.id === id);
+            if (match) setActiveArticle(match);
+          }}
+          onNotificationsChanged={() => setRefreshTrigger((prev) => prev + 1)}
         />
       )}
     </div>

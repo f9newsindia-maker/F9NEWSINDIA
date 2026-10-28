@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Bell, Radio, Shield, PenTool, Globe, Info, Share2, X } from 'lucide-react';
+import {
+  Search,
+  Bell,
+  Radio,
+  Shield,
+  PenTool,
+  Globe,
+  Info,
+  Share2,
+  X,
+  Newspaper,
+  Sparkles,
+  CloudSun,
+} from 'lucide-react';
 import { F9Logo } from './F9Logo';
 import { PWAInstallButton } from './PWAInstallButton';
-import { NewsArticle } from '../types/news';
+import { WeatherWidget } from './WeatherWidget';
 
 interface HeaderProps {
   onOpenSearch: () => void;
@@ -13,6 +26,9 @@ interface HeaderProps {
   onOpenAndroidGuide: () => void;
   unreadAlertCount: number;
   onOpenAlerts: () => void;
+  onOpenEPaper: () => void;
+  onOpenRashifal: () => void;
+  onOpenWeather: () => void;
   currentLanguage: 'hi' | 'en';
   onToggleLanguage: () => void;
 }
@@ -26,6 +42,9 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenAndroidGuide,
   unreadAlertCount,
   onOpenAlerts,
+  onOpenEPaper,
+  onOpenRashifal,
+  onOpenWeather,
   currentLanguage,
   onToggleLanguage,
 }) => {
@@ -35,10 +54,9 @@ export const Header: React.FC<HeaderProps> = ({
     const updateTime = () => {
       const now = new Date();
       const options: Intl.DateTimeFormatOptions = {
-        weekday: 'long',
+        weekday: 'short',
         day: 'numeric',
-        month: 'long',
-        year: 'numeric',
+        month: 'short',
       };
       const datePart = now.toLocaleDateString('hi-IN', options);
       const timePart = now.toLocaleTimeString('hi-IN', {
@@ -56,14 +74,39 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-red-900/30 text-white shadow-xl">
-      {/* Top micro-bar: Date, Live status, Reporter link */}
-      <div className="bg-slate-900/90 px-3 py-1 text-[11px] border-b border-slate-800 flex items-center justify-between">
-        <div className="flex items-center gap-2 overflow-hidden text-slate-300">
+      {/* Top micro-bar: Date, Weather/AQI, Live TV, E-Paper, Rashifal */}
+      <div className="bg-slate-900/90 px-3 py-1 text-[11px] border-b border-slate-800 flex items-center justify-between overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-2 shrink-0 text-slate-300">
           <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="truncate font-medium">{currentDateStr || 'बुधवार, 28 अक्टूबर 2026'}</span>
+          <span className="truncate font-medium">{currentDateStr || 'बुध, 28 अक्टू'}</span>
+          <span className="text-slate-700">|</span>
+          <WeatherWidget compact={true} onOpenFull={onOpenWeather} />
         </div>
 
-        <div className="flex items-center gap-2.5 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 pl-2">
+          {/* E-Paper Shortcut */}
+          <button
+            onClick={onOpenEPaper}
+            className="flex items-center gap-1 text-amber-300 hover:text-amber-200 font-bold"
+            title="दैनिक ई-अख़बार पढ़ें"
+          >
+            <Newspaper className="w-3 h-3 text-amber-400" />
+            <span className="hidden xs:inline">ई-अख़बार</span>
+          </button>
+          <span className="text-slate-700">|</span>
+
+          {/* Rashifal Shortcut */}
+          <button
+            onClick={onOpenRashifal}
+            className="flex items-center gap-1 text-purple-300 hover:text-purple-200 font-semibold"
+            title="आज का राशिफल एवं पंचांग"
+          >
+            <Sparkles className="w-3 h-3 text-purple-400" />
+            <span className="hidden xs:inline">राशिफल</span>
+          </button>
+          <span className="text-slate-700">|</span>
+
+          {/* Live TV */}
           <button
             onClick={onOpenLiveTv}
             className="flex items-center gap-1 text-red-400 hover:text-red-300 font-bold tracking-wide"
@@ -72,14 +115,18 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="hidden xs:inline">लाइव टीवी</span>
           </button>
           <span className="text-slate-700">|</span>
+
+          {/* Reporter Portal */}
           <button
             onClick={onOpenReporterPortal}
             className="flex items-center gap-1 text-blue-400 hover:text-blue-300 font-medium"
           >
             <PenTool className="w-3 h-3" />
-            <span>पत्रकार पोर्टल</span>
+            <span className="hidden sm:inline">संवाददाता</span>
           </button>
           <span className="text-slate-700">|</span>
+
+          {/* Language Toggle */}
           <button
             onClick={onToggleLanguage}
             className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-[10px]"
@@ -92,7 +139,10 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Main Brand Header */}
       <div className="px-3 py-2.5 flex items-center justify-between gap-2 max-w-7xl mx-auto">
         {/* Brand Logo */}
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
           <F9Logo variant="horizontal" size="md" />
         </div>
 
