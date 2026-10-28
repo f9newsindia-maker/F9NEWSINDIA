@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 120" width="480" height="120">
+  <defs>
+    <linearGradient id="logoRedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="60%" stop-color="#dc2626" />
+      <stop offset="100%" stop-color="#991b1b" />
+    </linearGradient>
+    <linearGradient id="logoBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="80%" stop-color="#1d4ed8" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+    <filter id="logoShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- Left Icon Emblem -->
+  <g transform="translate(10, 10)">
+    <!-- Red Rhombus Badge -->
+    <path d="M12 10 L84 4 L96 92 L24 98 Z" fill="url(#logoRedGrad)" filter="url(#logoShadow)" />
+    <!-- Blue Wedge -->
+    <path d="M72 5 L96 4 L80 94 L56 95 Z" fill="url(#logoBlueGrad)" />
+    <!-- Gold accent line -->
+    <path d="M14 96 L94 92 L93 95 L13 99 Z" fill="#fbbf24" />
+
+    <!-- F9 in White -->
+    <text x="24" y="68" font-family="'Inter', sans-serif" font-weight="900" font-size="52" fill="#ffffff" font-style="italic">F</text>
+    <text x="52" y="68" font-family="'Inter', sans-serif" font-weight="900" font-size="52" fill="#ffffff" font-style="italic">9</text>
+  </g>
+
+  <!-- Middle/Right Text: NEWS INDIA -->
+  <g transform="translate(125, 20)">
+    <!-- F9 NEWS in Deep Red / Black -->
+    <text x="0" y="42" font-family="'Inter', sans-serif" font-weight="950" font-size="44" fill="#ffffff" letter-spacing="1">
+      NEWS
+    </text>
+    <!-- INDIA in Blue with Indian tricolor feel / navy background -->
+    <rect x="145" y="6" width="130" height="42" rx="4" fill="url(#logoBlueGrad)" filter="url(#logoShadow)" />
+    <text x="210" y="37" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="900" font-size="28" fill="#ffffff" letter-spacing="3">
+      INDIA
+    </text>
+
+    <!-- Tagline Bar: सच की आवाज़ -->
+    <g transform="translate(0, 56)">
+      <rect x="0" y="0" width="275" height="24" rx="4" fill="url(#logoRedGrad)" />
+      <!-- Subtle Golden border accent -->
+      <line x1="0" y1="24" x2="275" y2="24" stroke="#fbbf24" stroke-width="2" />
+      <text x="137" y="18" text-anchor="middle" font-family="'Hind', 'Noto Sans Devanagari', sans-serif" font-weight="700" font-size="15" fill="#ffffff" letter-spacing="1.5">
+        सच की आवाज़
+      </text>
+    </g>
+
+    <!-- Digital Media Badge -->
+    <circle cx="288" cy="18" r="4" fill="#22c55e" />
+    <text x="296" y="22" font-family="'Inter', sans-serif" font-weight="700" font-size="10" fill="#94a3b8" letter-spacing="1">
+      24x7 HD
+    </text>
+  </g>
+</svg>

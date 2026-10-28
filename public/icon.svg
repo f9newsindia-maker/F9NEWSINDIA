@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="60%" stop-color="#dc2626" />
+      <stop offset="100%" stop-color="#991b1b" />
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="70%" stop-color="#1d4ed8" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+  </defs>
+
+  <!-- Dark Slate Android App Background with safe zone -->
+  <rect width="512" height="512" rx="100" fill="url(#bgGrad)" />
+
+  <!-- Outer Neon Rings / Circular Indian broadcast accent -->
+  <circle cx="256" cy="230" r="185" fill="none" stroke="#dc2626" stroke-width="4" stroke-opacity="0.3" />
+  <circle cx="256" cy="230" r="195" fill="none" stroke="#2563eb" stroke-width="3" stroke-opacity="0.2" />
+
+  <!-- Shield Badge Background -->
+  <g filter="url(#shadow)">
+    <!-- Red Rhombus / Badge -->
+    <path d="M120 110 L340 100 L392 310 L172 320 Z" fill="url(#redGrad)" />
+    <!-- Blue Accent Slash -->
+    <path d="M330 100 L392 100 L340 310 L278 310 Z" fill="url(#blueGrad)" opacity="0.9" />
+    <!-- Golden Accent Strip -->
+    <path d="M110 305 L382 295 L378 305 L106 315 Z" fill="#fbbf24" />
+  </g>
+
+  <!-- Bold F9 Emblem -->
+  <!-- Letter 'F' -->
+  <path d="M170 145 H255 V180 H208 V200 H248 V232 H208 V285 H170 Z" fill="#ffffff" filter="url(#shadow)" />
+  <!-- Number '9' -->
+  <path d="M268 145 H338 V285 H302 V242 C302 242 292 248 275 248 C252 248 240 230 240 205 C240 170 255 145 285 145 Z M302 178 C294 178 288 185 288 198 C288 212 294 218 302 218 V178 Z" fill="#ffffff" filter="url(#shadow)" />
+
+  <!-- Sub-banner: NEWS INDIA -->
+  <rect x="90" y="340" width="332" height="46" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5" />
+  <text x="256" y="372" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="900" font-size="28" fill="#ffffff" letter-spacing="4">
+    NEWS INDIA
+  </text>
+
+  <!-- Hindi Tagline: सच की आवाज़ -->
+  <g>
+    <rect x="120" y="405" width="272" height="40" rx="20" fill="url(#redGrad)" />
+    <text x="256" y="432" text-anchor="middle" font-family="'Hind', sans-serif" font-weight="700" font-size="20" fill="#ffffff" letter-spacing="1">
+      सच की आवाज़
+    </text>
+  </g>
+
+  <!-- Small Live Broadcast Beacon Indicator -->
+  <circle cx="410" cy="115" r="9" fill="#22c55e" />
+  <circle cx="410" cy="115" r="14" fill="none" stroke="#22c55e" stroke-width="2" opacity="0.6">
+    <animate attributeName="r" values="12;20;12" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;0;0.8" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>

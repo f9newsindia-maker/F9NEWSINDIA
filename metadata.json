@@ -1,0 +1,6 @@
+{
+  "name": "F9NEWSINDIA - सच की आवाज़",
+  "description": "F9NEWSINDIA का आधिकारिक डिजिटल समाचार ऐप। देश, राज्य, राजनीति, अपराध, मनोरंजन और ब्रेकिंग न्यूज़ सबसे तेज़ और निष्पक्ष।",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
